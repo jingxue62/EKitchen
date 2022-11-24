@@ -32,6 +32,7 @@
     "pk": 1,
     "fields": {
       "name": "Jings' Taco",
+      "image": "/images/taco.jpeg",
       "price": "10.00",
       "discount": 1.0,
       "owner": 1,
@@ -46,13 +47,14 @@
     "model": "EKitchen.product",
     "pk": 2,
     "fields": {
-      "name": "Woody Hamburger",
+      "name": "Woody Sandwiches",
+      "image": "/images/sandwiches.png",
       "price": "15.00",
       "discount": 0.8,
       "owner": 2,
       "availability": 10,
       "rate": 5,
-      "description": "Ah! Nice hamburger!",
+      "description": "Ah! Nice Sandwiches!",
       "created_at": "2020-11-10 10:10",
       "updated_at": "2020-12-10 10:10"
     }
@@ -62,6 +64,7 @@
     "pk": 3,
     "fields": {
       "name": "Jessie's Sushi",
+      "image": "/images/sushi.jpg",
       "price": "20.00",
       "discount": 0.9,
       "owner": 2,
@@ -76,13 +79,14 @@
     "model": "EKitchen.product",
     "pk": 4,
     "fields": {
-      "name": "Bullseye smoke house",
+      "name": "Spicy Roast Fish",
+      "image": "/images/fish.png",
       "price": "50.00",
       "discount": 0.7,
       "owner": 1,
       "availability": 10,
       "rate": 2,
-      "description": "Lots of food ...",
+      "description": "Popular Chinese cuisine",
       "created_at": "2022-1-10 10:10",
       "updated_at": "2022-2-10 10:10"
     }
@@ -91,13 +95,14 @@
     "model": "EKitchen.product",
     "pk": 5,
     "fields": {
-      "name": "Tea Party",
+      "name": "Spring Roll",
+      "image": "/images/springRoll.png",
       "price": "8.00",
       "discount": 1.0,
       "owner": 1,
       "availability": 100,
       "rate": 5,
-      "description": "Many kinds of tea drinks, choose what you want.",
+      "description": "Many kinds of spring rolls, choose what you want.",
       "created_at": "2022-10-10 10:10",
       "updated_at": "2022-11-10 10:10"
     }
@@ -107,6 +112,7 @@
     "pk": 6,
     "fields": {
       "name": "Poke GO",
+      "image": "/images/poke.png",
       "price": "16.99",
       "discount": 1.0,
       "owner": 2,
@@ -121,13 +127,14 @@
     "model": "EKitchen.product",
     "pk": 7,
     "fields": {
-      "name": "Panda's choice",
-      "price": "6.00",
+      "name": "Fried Dumplings",
+      "image": "/images/dumplings.png",
+      "price": "18.00",
       "discount": 0.6,
       "owner": 2,
       "availability": 90,
       "rate": 2,
-      "description": "U.S. Chinese food.",
+      "description": "Many kinds of flavors, choose what you want.",
       "created_at": "2001-1-10 10:10",
       "updated_at": "2001-10-10 10:10"
     }
@@ -136,8 +143,9 @@
     "model": "EKitchen.product",
     "pk": 8,
     "fields": {
-      "name": "Little New Delhi",
-      "price": "17.99",
+      "name": "Tasty Samosa",
+      "image": "/images/samosa.png",
+      "price": "12.99",
       "discount": 1.0,
       "owner": 2,
       "availability": 100,
