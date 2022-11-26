@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.http import JsonResponse
-
+from django.db import connection
 from .models import User, Product, Order
 
 from django.core import serializers
@@ -30,9 +30,37 @@ def get_all_users(request):
     return JsonResponse({'data': list(User.objects.values()), 'message': ""}, safe=False)
 
 
-def get_all_products(request):
-    return JsonResponse({'data': list(Product.objects.values()), 'message': ""}, safe=False)
-
+def get_all_products(request, num):
+    if num == 2:
+        cursor = connection.cursor()
+        cursor.execute('''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
+                                    EKitchen_product.*, EKitchen_user.username
+                            from EKitchen_product, EKitchen_user 
+                            where EKitchen_product.owner_id = EKitchen_user.id
+                            order by realPrice ASC''')
+        result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
+        cursor.connection.close()
+        return JsonResponse({'data': result, 'message': ""}, safe=False)
+    elif num ==3: 
+        cursor = connection.cursor()
+        cursor.execute('''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
+                                    EKitchen_product.*, EKitchen_user.username
+                            from EKitchen_product, EKitchen_user 
+                            where EKitchen_product.owner_id = EKitchen_user.id
+                            order by realPrice DESC''')
+        result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
+        cursor.connection.close()
+        return JsonResponse({'data': result, 'message': ""}, safe=False)
+    else: 
+        cursor = connection.cursor()
+        cursor.execute('''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
+                                    EKitchen_product.*, EKitchen_user.username
+                            from EKitchen_product, EKitchen_user 
+                            where EKitchen_product.owner_id = EKitchen_user.id
+                            order by EKitchen_product.updated_at DESC''')
+        result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
+        cursor.connection.close()
+        return JsonResponse({'data': result, 'message': ""}, safe=False)
 
 def get_all_orders(request):
     return JsonResponse({'data': list(Order.objects.values()), 'message': ""}, safe=False)
