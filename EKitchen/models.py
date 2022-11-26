@@ -15,7 +15,7 @@ class User(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=120)
-    image = models.CharField(max_length=500)
+    image = models.CharField(max_length=120)
     price = models.CharField(max_length=120, default="0")
     discount = models.FloatField(default=1.0)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)

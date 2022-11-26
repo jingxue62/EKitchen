@@ -27,5 +27,5 @@ urlpatterns = [
     path('orders/', views.get_all_orders, name='get_all_orders'),
     path('products/top/<int:num>', views.get_top_products, name='get_top_products'),
     path('products/recommend/<int:num>', views.get_recommend_products, name='get_recommend_products'),
-    path('products/search/<str:keyword>', views.get_product_search, name='get_product_search'),
+    path('products/search/<str:keywords>', views.get_product_search, name='get_product_search'),
 ]
