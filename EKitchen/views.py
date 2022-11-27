@@ -8,6 +8,8 @@ from django.conf import settings
 from django.db.models import Q
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.views.decorators.cache import cache_page
+from django.views.decorators.csrf import csrf_exempt
+
 import json
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -112,3 +114,59 @@ def get_product_search(request, keywords):
     if user_ids:
         results += [p for p in Product.objects.filter(owner_id__in=user_ids).values() if p.get('id') not in hs]
     return JsonResponse({'data': results, 'message': ""}, safe=False)
+
+
+def get_orders_by_user(request, userId):
+    results = []
+    order_list = Order.objects.filter(buyer=userId).values()
+    # Enrich data
+    for o in order_list:
+        product_obj = Product.objects.filter(id=o.get('product_id')).values()[0]
+        o['name'] = product_obj['name']
+        o['image'] = product_obj['image']
+        o['price'] = product_obj['price']
+        o['discount'] = product_obj['discount']
+        o['owner_id'] = product_obj['owner_id']
+        o['is_active'] = product_obj['is_active']
+        o['availability'] = product_obj['availability']
+        user_obj = User.objects.filter(id=product_obj.get('owner_id')).values()[0]
+        o['username'] = user_obj['username']
+        results.append(o)
+    return JsonResponse(
+        {'data': results, 'message': ""}, safe=False)
+
+
+@csrf_exempt
+def place_order(request):
+    try:
+        if request.method == 'POST':
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+            product_instance = Product.objects.get(id=body["product_id"])
+            user_instance = User.objects.get(id=body["buyer_id"])
+            new_order = Order(product=product_instance,
+                              buyer=user_instance,
+                              quantity=body["quantity"],
+                              description=body["desc"])
+            new_order.save()
+        else:
+            raise Exception("Please post data to this interface.")
+    except Exception as err:
+        return JsonResponse({'data': '', 'message': "Error:" + str(err)}, safe=False)
+    return JsonResponse({'data': '', 'message': "Successfully done."}, safe=False)
+
+
+@csrf_exempt
+def delete_order(request):
+    try:
+        if request.method == 'POST':
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+            order_instance = Order.objects.get(id=body["id"])
+            order_instance.delete()
+        else:
+            raise Exception("Please post Order ID to this interface.")
+    except Exception as err:
+        raise
+        # return JsonResponse({'data': '', 'message': "Error:" + str(err)}, safe=False)
+    return JsonResponse({'data': '', 'message': "Successfully done."}, safe=False)
