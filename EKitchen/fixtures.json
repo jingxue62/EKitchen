@@ -17,9 +17,9 @@
     "model": "EKitchen.user",
     "pk": 2,
     "fields": {
-      "username": "dicao",
-      "first": "di",
-      "last": "cao",
+      "username": "jingshu",
+      "first": "jing",
+      "last": "shu",
       "dob": "2010-10-10 10:10",
       "address": "this is a string for test.",
       "email": "sample@email.com",
