@@ -33,7 +33,7 @@
     "fields": {
       "name": "Jings' Taco",
       "image": "/images/taco.jpeg",
-      "price": "10.00",
+      "price": 10.00,
       "discount": 1.0,
       "owner": 1,
       "availability": 1,
@@ -49,7 +49,7 @@
     "fields": {
       "name": "Woody Sandwiches",
       "image": "/images/sandwiches.png",
-      "price": "15.00",
+      "price": 15.00,
       "discount": 0.8,
       "owner": 2,
       "availability": 10,
@@ -65,7 +65,7 @@
     "fields": {
       "name": "Jessie's Sushi",
       "image": "/images/sushi.jpg",
-      "price": "20.00",
+      "price": 20.00,
       "discount": 0.9,
       "owner": 2,
       "availability": 30,
@@ -81,7 +81,7 @@
     "fields": {
       "name": "Spicy Roast Fish",
       "image": "/images/fish.png",
-      "price": "50.00",
+      "price": 50.00,
       "discount": 0.7,
       "owner": 1,
       "availability": 10,
@@ -97,7 +97,7 @@
     "fields": {
       "name": "Spring Roll",
       "image": "/images/springRoll.png",
-      "price": "8.00",
+      "price": 8.00,
       "discount": 1.0,
       "owner": 1,
       "availability": 100,
@@ -113,7 +113,7 @@
     "fields": {
       "name": "Poke GO",
       "image": "/images/poke.png",
-      "price": "16.99",
+      "price": 16.99,
       "discount": 1.0,
       "owner": 2,
       "availability": 10,
@@ -129,7 +129,7 @@
     "fields": {
       "name": "Fried Dumplings",
       "image": "/images/dumplings.png",
-      "price": "18.00",
+      "price": 18.00,
       "discount": 0.6,
       "owner": 2,
       "availability": 90,
@@ -145,7 +145,7 @@
     "fields": {
       "name": "Tasty Samosa",
       "image": "/images/samosa.png",
-      "price": "12.99",
+      "price": 12.99,
       "discount": 1.0,
       "owner": 2,
       "availability": 100,
