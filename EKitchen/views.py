@@ -33,37 +33,41 @@ def get_all_users(request):
     return JsonResponse({'data': list(User.objects.values()), 'message': ""}, safe=False)
 
 
+def get_sorted_products(query):
+    cursor = connection.cursor()
+    cursor.execute(query)
+    result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
+    cursor.connection.close()
+    return result
+
+
 def get_all_products(request, num):
+    query1 = '''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
+                                    EKitchen_product.*, EKitchen_user.username
+                            from EKitchen_product, EKitchen_user 
+                            where EKitchen_product.owner_id = EKitchen_user.id
+                            order by EKitchen_product.updated_at DESC'''
+
+    query2 = '''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
+                                    EKitchen_product.*, EKitchen_user.username
+                            from EKitchen_product, EKitchen_user 
+                            where EKitchen_product.owner_id = EKitchen_user.id
+                            order by realPrice ASC'''
+    query3 = '''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
+                                    EKitchen_product.*, EKitchen_user.username
+                            from EKitchen_product, EKitchen_user 
+                            where EKitchen_product.owner_id = EKitchen_user.id
+                            order by realPrice DESC'''
     if num == 2:
-        cursor = connection.cursor()
-        cursor.execute('''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
-                                    EKitchen_product.*, EKitchen_user.username
-                            from EKitchen_product, EKitchen_user 
-                            where EKitchen_product.owner_id = EKitchen_user.id
-                            order by realPrice ASC''')
-        result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
-        cursor.connection.close()
+        result = get_sorted_products(query2)
         return JsonResponse({'data': result, 'message': ""}, safe=False)
-    elif num ==3: 
-        cursor = connection.cursor()
-        cursor.execute('''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
-                                    EKitchen_product.*, EKitchen_user.username
-                            from EKitchen_product, EKitchen_user 
-                            where EKitchen_product.owner_id = EKitchen_user.id
-                            order by realPrice DESC''')
-        result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
-        cursor.connection.close()
+    elif num == 3:
+        result = get_sorted_products(query3)
         return JsonResponse({'data': result, 'message': ""}, safe=False)
-    else: 
-        cursor = connection.cursor()
-        cursor.execute('''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
-                                    EKitchen_product.*, EKitchen_user.username
-                            from EKitchen_product, EKitchen_user 
-                            where EKitchen_product.owner_id = EKitchen_user.id
-                            order by EKitchen_product.updated_at DESC''')
-        result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
-        cursor.connection.close()
+    else:
+        result = get_sorted_products(query1)
         return JsonResponse({'data': result, 'message': ""}, safe=False)
+
 
 def get_all_orders(request):
     return JsonResponse({'data': list(Order.objects.values()), 'message': ""}, safe=False)
