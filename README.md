@@ -1,48 +1,48 @@
-#Project EKitchen
+# Project EKitchen
 
-##Install
+## Install
 
-###Requirements:
+### Requirements:
 - python3
 - pip
 - venv
 - django
 
 
-###Enter Virtual env
+### Enter Virtual env
 python3 -m venv EK-venv 
 source EK-venv/bin/activate
 pip install Django
 
 
 
-###Exit venv:
+### Exit venv:
 
 deactivate
 
 
-###Initialization:
+### Initialization:
 django-admin startproject EKitchen .
 
 
-##Run Server:
+## Run Server:
 python manage.py runserver
 
-###Migration:
+### Migration:
 python manage.py migrate
 
-###Create tables:
+### Create tables:
 python manage.py makemigrations EKitchen
 (Recommand to preview the SQL first, 'sqlmigrate')
 python manage.py migrate
 
-###View SQL queries:
+### View SQL queries:
 python manage.py sqlmigrate EKitchen 0001
 
-###Shell:
+### Shell:
 python manage.py shell
 
-###DBShell:
+### DBShell:
 python manage.py dbshell
 
 ```
@@ -50,30 +50,30 @@ python manage.py dbshell
 > select * from <table name>;
 ```
 
-###Prepopulate data:
+### Prepopulate data:
 python manage.py loaddata ./EKitchen/fixtures.json 
 
 
-##Cache service
+## Cache service
 We use redis for the caching.
 
-###Redis install:
+### Redis install:
 https://redis.io/download/
 Or:
 ```brew install redis```
 
-###Run Redis server
+### Run Redis server
 ```$ redis-server```
 
-###Test
+### Test
 ```$ redis-cli ping```
 
 See the output: "PONG"
 
-###Install django-redis
+### Install django-redis
 ```python -m pip install django-redis```
 
-###Django settings
+### Django settings
 In `settings.py`:
 ```CACHES = {
     "default": {
@@ -84,10 +84,11 @@ In `settings.py`:
         },
         "KEY_PREFIX": "ek"
     }
-}```
+}
+```
 
 
-#Ref:
+# Ref:
 https://docs.djangoproject.com/en/4.1/intro/tutorial01/
 https://docs.djangoproject.com/en/4.1/intro/tutorial02/
 https://docs.djangoproject.com/en/4.1/topics/db/queries/
