@@ -28,4 +28,7 @@ urlpatterns = [
     path('products/top/<int:num>', views.get_top_products, name='get_top_products'),
     path('products/recommend/<int:num>', views.get_recommend_products, name='get_recommend_products'),
     path('products/search/<str:keywords>', views.get_product_search, name='get_product_search'),
+    path('orders/user/<int:userId>', views.get_orders_by_user, name='get_orders_by_user'),
+    path('orders/placeOrder', views.place_order, name='place_order'),
+    path('orders/deleteOrder', views.delete_order, name='delete_order'),
 ]
