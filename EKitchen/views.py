@@ -45,15 +45,6 @@ def get_all_users(request):
 
 
 @cache_page(CACHE_TTL)
-def get_sorted_products(query):
-    cursor = connection.cursor()
-    cursor.execute(query)
-    result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
-    cursor.connection.close()
-    return result
-
-
-@cache_page(CACHE_TTL)
 def get_all_products(request, num):
     query1 = '''select EKitchen_product.price * EKitchen_product.discount as realPrice, 
                                     EKitchen_product.*, EKitchen_user.username
@@ -71,13 +62,20 @@ def get_all_products(request, num):
                             from EKitchen_product, EKitchen_user 
                             where EKitchen_product.owner_id = EKitchen_user.id
                             order by realPrice DESC'''
+    def get_sorted_products(query):
+        cursor = connection.cursor()
+        cursor.execute(query)
+        result = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) for row in cursor.fetchall()] 
+        cursor.connection.close()
+        return result
+        
     if num == 2:
         result = get_sorted_products(query2)
         return JsonResponse({'data': result, 'message': ""}, safe=False)
-    elif num == 3:
+    elif num == 3:     
         result = get_sorted_products(query3)
         return JsonResponse({'data': result, 'message': ""}, safe=False)
-    else:
+    else:      
         result = get_sorted_products(query1)
         return JsonResponse({'data': result, 'message': ""}, safe=False)
 
