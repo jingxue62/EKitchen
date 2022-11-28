@@ -14,7 +14,8 @@ python3 -m venv EK-venv
 source EK-venv/bin/activate
 pip install Django
 
-
+### To solve the sqlite3 version issue on AL2
+see: https://stackoverflow.com/questions/57214850/trying-to-upgrade-sqlite-on-amazon-ec2
 
 ### Exit venv:
 
