@@ -88,6 +88,10 @@ In `settings.py`:
 }
 ```
 
+## Remote database setup
+On AL2: `sudo amazon-linux-extras install postgresql10`
+
+
 
 # Ref:
 https://docs.djangoproject.com/en/4.1/intro/tutorial01/
