@@ -89,8 +89,10 @@ In `settings.py`:
 ```
 
 ## Remote database setup
-On AL2: `sudo amazon-linux-extras install postgresql10`
+On AL2: `sudo amazon-linux-extras install postgresql12`
+http://howto.philippkeller.com/2022/05/03/How-to-install-postgres-on-amazon-linux-2/
 
+`pip install psycopg2-binary` on Django side to use postgresql
 
 
 # Ref:
