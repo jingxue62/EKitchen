@@ -29,7 +29,7 @@ def get_user(request, uid):
 @cache_page(CACHE_TTL)
 def get_product(request, pid):
     prod = Product.objects.filter(id=pid).values()[0]
-    user_info = User.objects.filter(id=prod.get('owner_id')).values()[0]
+    user_info = User.objects.filter(id=prod.get('owner_id')).values('username','address', 'email', 'is_active')[0]
     prod.update(user_info)
     return JsonResponse({'data': prod, 'message': ""}, safe=False)
 
@@ -51,16 +51,11 @@ def get_all_products(request):
     # Enrich data
     for o in product_list:
         user_obj = User.objects.filter(id=o.get('owner_id')).values()[0]
-        print(user_obj)
         o['username'] = user_obj['username']
         o['realPrice'] = o['price']*o['discount']
         results.append(o)
-    
     return JsonResponse(
         {'data': results, 'message': ""}, safe=False)
-# @cache_page(CACHE_TTL)
-# def get_all_products(request):
-#     return JsonResponse({'data': list(Product.objects.values()), 'message': ""}, safe=False)
 
 
 @cache_page(CACHE_TTL)
