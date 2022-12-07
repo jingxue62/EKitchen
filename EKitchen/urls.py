@@ -19,6 +19,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register', views.register, name='register'),
+    path('signin', views.signin, name='signin'),
     path('user/<int:uid>/', views.get_user, name='get_user'),
     path('product/<int:pid>/', views.get_product, name='get_product'),
     path('order/<int:oid>/', views.get_order, name='get_order'),
@@ -31,4 +33,7 @@ urlpatterns = [
     path('orders/user/<int:userId>', views.get_orders_by_user, name='get_orders_by_user'),
     path('orders/placeOrder', views.place_order, name='place_order'),
     path('orders/deleteOrder', views.delete_order, name='delete_order'),
+    path('kitchens/user/<int:userId>', views.get_kitchens_by_user, name='get_kitchens_by_user'),
+    path('kitchens/order/<int:userId>', views.get_kitchens_by_order, name='get_kitchens_by_order'),
+
 ]

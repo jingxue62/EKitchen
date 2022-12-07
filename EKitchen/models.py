@@ -7,6 +7,7 @@ class User(models.Model):
     last = models.CharField(max_length=20)
     dob = models.DateTimeField(blank=True, null=True)
     address = models.CharField(max_length=120)
+    password = models.CharField(max_length=20, blank=True, default="")
     email = models.EmailField(max_length=255, blank=True, default="")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
